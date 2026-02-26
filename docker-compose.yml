@@ -1,0 +1,20 @@
+services:
+  tg-bot-service:
+    container_name: tg-bot-service
+    image: ticketing/tg-bot-service:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env.production.local
+    expose:
+      - '9101'
+    volumes:
+      - ../logs/tg-bot:/var/log/services/tg-bot
+    networks:
+      - choncinema
+
+networks:
+  choncinema:
+      external: true
